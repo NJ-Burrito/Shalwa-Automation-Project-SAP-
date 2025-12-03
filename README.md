@@ -11,7 +11,7 @@ Prerequisites
 Step-by-step
 1.	Clone the repo
 bash
-1. git clone https://github.com/your-username/Shalwa_Automation_Project_SAP.git
+1. git clone https://github.com/NJ-Burrito/Shalwa-Automation-Project-SAP-.git
 2. cd Shalwa_Automation_Project_SAP
 3.  
 2.	Set driver path Edit POMUt.setDriverLocation(...) or set system property before running tests. Example:
