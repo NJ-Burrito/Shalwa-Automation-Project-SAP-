@@ -144,3 +144,6 @@ A beginner-friendly Java + Selenium Page Object Model test framework for the Sau
 
 ## Closing Note 🦜💬
 Thanks for exploring **Shalwa Automation Project SAP**. This framework was built with curiosity, a little caffeine, and the vocal encouragement of a parrot named **Shalwa**. If you add features or fixes, give Shalwa a shout — she’ll squawk her approval. Happy testing and welcome to the flock!
+
+linkedIn:- www.linkedin.com/in/nader-alzghoul
+
