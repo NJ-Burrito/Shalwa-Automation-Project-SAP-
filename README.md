@@ -1,149 +1,95 @@
-# Shalwa Automation Project SAP 🦜✨
+# Shalwa Automation Project (SAP) 🦜
 
-## Project Description
-**Shalwa Automation Project SAP** is a Java + Selenium test automation framework that exercises the GUI of the SauceDemo site. It automates common user flows such as logging in with different users, adding and removing items from the cart, verifying cart persistence, sorting products, navigating the sidebar and social links, and completing checkout flows. The framework follows the **Page Object Model** for clarity, reusability, and maintainability.
+**Java + Selenium WebDriver test automation for the [SauceDemo](https://www.saucedemo.com/) shop, built on the Page Object Model.**
+Login with several users, cart, sorting, sidebar and social links, and the full checkout, in 7 JUnit 5 test classes.
 
-## Key Features
-- **End-to-end GUI tests** for SauceDemo flows ✅  
-- **Page Object Model** structure for clean separation of concerns ✅  
-- **Cross-browser ready** drivers abstraction for Chrome, Firefox, Safari ✅  
-- **Utility helpers** for common checks like price sorting ✅  
-- **JUnit test suite** with modular test classes for easy execution ✅
+By [Nader Alzghoul](https://nj-burrito.github.io/), QA Automation Engineer in Amman, Jordan.
 
-## Tech Stack
-- **Language**: Java  
-- **Test framework**: JUnit  
-- **Browser automation**: Selenium WebDriver  
-- **Build tool**: Maven  
-- **Design pattern**: Page Object Model
+<p>
+  <img alt="Java 8" src="https://img.shields.io/badge/Java-8-16171B?style=for-the-badge">
+  <img alt="Selenium 4.38" src="https://img.shields.io/badge/Selenium-4.38-3D7F7A?style=for-the-badge">
+  <img alt="JUnit 5" src="https://img.shields.io/badge/JUnit-5-34473B?style=for-the-badge">
+  <img alt="Maven" src="https://img.shields.io/badge/Build-Maven-A3573B?style=for-the-badge">
+  <a href="https://nj-burrito.github.io/"><img alt="Portfolio" src="https://img.shields.io/badge/Portfolio-nj--burrito.github.io-5A1E26?style=for-the-badge"></a>
+</p>
 
-## Prerequisites 🚀
-- **Java JDK 11 or newer** installed and **JAVA_HOME** set  
-- **Apache Maven** installed and on your PATH  
-- **Browser driver** that matches your browser version (for example ChromeDriver)  
-- Recommended IDE: **IntelliJ IDEA** or **Eclipse**
+## At a glance
 
-## Installation Guide
-### 1. Clone the repository
+| | |
+|---|---|
+| **Site under test** | SauceDemo (saucedemo.com) |
+| **Pattern** | Page Object Model: 6 page objects plus a shared checkout base |
+| **Tests** | 7 JUnit 5 classes: login, home, cart, navigation, checkout step one, step two, complete |
+| **Browsers** | Chrome, Firefox, Safari, and Chrome emulating an iPhone 11 (`DriversOptions`) |
+| **Stack** | Java 8, Selenium WebDriver 4.38, JUnit 5 (Jupiter), Maven |
+
+## What it covers
+
+- **Login:** every SauceDemo user account in one test (standard, locked out, problem, performance glitch, error, visual).
+- **Home:** sort by price, ascending and descending (checked by `HomeUt`).
+- **Cart:** item names and counts, remove buttons, items stay after Continue shopping, Checkout goes to the right page.
+- **Navigation:** sidebar links (All items, About, Logout, Reset app state) and the Facebook, Twitter and LinkedIn links, each opening a new tab.
+- **Checkout:** step one (URL, Cancel), step two (item count, Cancel, Finish) and the completion page.
+
+## Get the code
+
+The source is in **`Shalwa_Automation_Project_SAP.rar`** in this repo.
+
+1. Clone the repo and extract the archive (7-Zip or WinRAR).
+2. Open the `Shalwa_Automation_Project_SAP` folder in IntelliJ IDEA or Eclipse as a Maven project.
+3. You need Java (JDK 8 or newer), Maven, and a browser driver that matches your browser (for example ChromeDriver).
+
 ```bash
 git clone https://github.com/NJ-Burrito/Shalwa-Automation-Project-SAP-.git
-cd Shalwa_Automation_Project_SAP
 ```
 
-### 2. Set the browser driver path
-Open the project and set the driver path in code or via system property. Example using the helper utility:
+## Run it
+
+1. Point Selenium at your driver, in code:
+   ```java
+   POMUt.setDriverLocation("src/main/resources/chromedriver.exe");
+   ```
+2. Build: `mvn clean compile`
+3. Run a test class from the IDE, for example `CartPageTests` in `src/main/java/Shalwa/Nader/pom/tests/`.
+
+Example, in code:
+
 ```java
-POMUt.setDriverLocation("src/main/resources/chromedriver.exe");
-```
-Alternatively set the system property when running Maven:
-```bash
-mvn -Dwebdriver.chrome.driver=/path/to/chromedriver test
-```
-
-### 3. Build the project
-```bash
-mvn clean compile
-```
-
-### 4. Run the test suite
-Run all tests:
-```bash
-mvn test
-```
-Run a single test class:
-```bash
-mvn -Dtest=LoginPageTests test
-```
-You can also run tests directly from your IDE.
-
-## Configuration Tips
-- Keep the driver binary version aligned with your browser version.  
-- Use explicit waits in tests to improve stability.  
-- If you need mobile viewport simulation, use the CHROME_IPHONE11 option and set the window size in the driver setup.
-
-## Usage Examples 🧪
-### Programmatic example
-```java
-// Create a browser instance
 WebDriver driver = Drivers.getDriver(DriversOptions.CHROME);
-
-// Use page objects
 LoginPage login = new LoginPage(driver);
 HomePage home = login.goToHomePage();
-CartPage cart = home.gotoCartPage(driver);
-
-// Perform actions
 home.addBackpackToCart();
-home.addBikeLightToCart();
-cart = home.gotoCartPage(driver);
+CartPage cart = home.gotoCartPage(driver);
 ```
 
-### Running a focused test from Maven
-```bash
-mvn -Dtest=CartPageTests test
+## Project structure
+
+```
+src/main/java/Shalwa/Nader/pom/
+├── driver/     Drivers, DriversOptions (browser creation and options)
+├── pages/      LoginPage, HomePage, CartPage, NavigationPage
+│   ├── checkoutpage/  Checkout, CheckoutPageone, CheckoutPagetwo
+│   └── utility/       HomeUt (sorting and price checks), POMUt (driver path)
+└── tests/      LoginPageTests, HomePageTests, CartPageTests, NavigationPageTests,
+                CheckoutStepOnePageTests, CheckoutStepTwoPageTests, CheckoutCompletePageTests
 ```
 
-### Common helper usage
-```java
-// Set driver path at runtime
-POMUt.setDriverLocation("src/main/resources/chromedriver.exe");
+The repo root also holds the project write-up as a PDF and a spreadsheet.
 
-// Check price sorting
-HomePage home = new HomePage(driver);
-home.sortProductsByPriceAscending();
-boolean sorted = home.isPriceAscending();
-```
+## Who made it
 
-## Project Structure Overview
-- **driver**: `Drivers`, `DriversOptions` — centralizes browser creation and options  
-- **pages**: Page objects such as `LoginPage`, `HomePage`, `CartPage`, `CheckoutPageone`, `CheckoutPagetwo`, `NavigationPage`  
-- **pages/utility**: helpers like `HomeUt` and `POMUt`  
-- **tests**: JUnit test classes (for example `CartPageTests`)  
-- **resources**: place browser drivers and test data here
+Nader Alzghoul (نادر الزغول), QA Automation Engineer in Amman, Jordan. He also builds free, open-source tools:
 
-## Best Practices and Tips
-- Keep tests **idempotent** and **isolated** so they can run in any order.  
-- Prefer **explicit waits** over sleeps for stability.  
-- Use small, focused test methods that assert one behavior each.  
-- Add logging and screenshots on failure to speed up debugging.
+- [QA-Wrap](https://nj-burrito.github.io/QA-Wrap/): a browser extension that records a test session and writes the bug report.
+- [NJ-Kit](https://nj-burrito.github.io/NJ-Kit/): a working method for Claude Code, 40 skills in the kit.
+- [Profile-Wrap](https://nj-burrito.github.io/Profile-Wrap/): plans, writes and checks LinkedIn posts.
 
-## Contributing 🤝
-Contributions are welcome and encouraged. To contribute:
-1. Fork the repository.  
-2. Create a feature branch with a descriptive name.  
-3. Add tests for any new behavior.  
-4. Open a pull request with a clear description and screenshots or logs if relevant.
+Portfolio: [nj-burrito.github.io](https://nj-burrito.github.io/) · LinkedIn: [linkedin.com/in/nader-alzghoul](https://www.linkedin.com/in/nader-alzghoul)
 
-**Suggested improvements**
-- Add cross-browser CI using GitHub Actions.  
-- Add reporting with Allure or Surefire HTML reports.  
-- Replace manual waits with robust explicit wait utilities.  
-- Add Page Factory or component-level abstractions for complex pages.
+## License
 
-## License 📜
-This project is shared under the **MIT License**. You are free to use, modify, and distribute the code. Please include attribution and the LICENSE file in your copy of the repository. Add a `LICENSE` file to the repo with the full MIT text.
+Shared under the MIT License.
 
-## Quick Reference Commands
-```bash
-# Build
-mvn clean compile
+## Closing note 🦜
 
-# Run all tests
-mvn test
-
-# Run a single test class
-mvn -Dtest=LoginPageTests test
-
-# Run with a specific chromedriver path
-mvn -Dwebdriver.chrome.driver=/path/to/chromedriver test
-```
-
-## Project Description for GitHub
-**Shalwa Automation Project SAP**  
-A beginner-friendly Java + Selenium Page Object Model test framework for the SauceDemo site. SAP automates login, product sorting, cart operations, sidebar navigation, social links, and checkout flows. Designed for clarity and maintainability, the framework includes reusable page objects, driver abstractions, utility helpers, and a JUnit test suite.
-
-## Closing Note 🦜💬
-Thanks for exploring **Shalwa Automation Project SAP**. This framework was built with curiosity, a little caffeine, and the vocal encouragement of a parrot named **Shalwa**. If you add features or fixes, give Shalwa a shout — she’ll squawk her approval. Happy testing and welcome to the flock!
-
-linkedIn:- www.linkedin.com/in/nader-alzghoul
-
+This framework was built with curiosity, a little caffeine, and the vocal encouragement of a parrot named **Shalwa**. If you add features or fixes, give Shalwa a shout; she'll squawk her approval. Happy testing.
