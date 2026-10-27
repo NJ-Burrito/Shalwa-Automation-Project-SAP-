@@ -33,11 +33,10 @@ By [Nader Alzghoul](https://nj-burrito.github.io/), QA Automation Engineer in Am
 
 ## Get the code
 
-The source is in **`Shalwa_Automation_Project_SAP.rar`** in this repo.
+The source is in this repo: `pom.xml` and `src/` (the old `.rar` archive is gone).
 
-1. Clone the repo and extract the archive (7-Zip or WinRAR).
-2. Open the `Shalwa_Automation_Project_SAP` folder in IntelliJ IDEA or Eclipse as a Maven project.
-3. You need Java (JDK 8 or newer), Maven, and a browser driver that matches your browser (for example ChromeDriver).
+1. Clone the repo and open it in IntelliJ IDEA or Eclipse as a Maven project.
+2. You need Java (JDK 8 or newer), Maven, and a browser driver that matches your browser. The tests read ChromeDriver from `src/main/resources/chromedriver.exe`, which is not committed: download the version that matches your Chrome and place it there.
 
 ```bash
 git clone https://github.com/NJ-Burrito/Shalwa-Automation-Project-SAP-.git
@@ -93,3 +92,7 @@ Shared under the MIT License.
 ## Closing note 🦜
 
 This framework was built with curiosity, a little caffeine, and the vocal encouragement of a parrot named **Shalwa**. If you add features or fixes, give Shalwa a shout; she'll squawk her approval. Happy testing.
+
+## License
+
+MIT, see [LICENSE](LICENSE).
