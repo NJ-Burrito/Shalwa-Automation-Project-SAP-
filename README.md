@@ -1,7 +1,7 @@
-# Shalwa Automation Project (SAP) 🦜
+# Shalwa Automation Project (SAP): Selenium Java JUnit 5 test automation 🦜
 
 **Java + Selenium WebDriver test automation for the [SauceDemo](https://www.saucedemo.com/) shop, built on the Page Object Model.**
-Login with several users, cart, sorting, sidebar and social links, and the full checkout, in 7 JUnit 5 test classes.
+A portfolio example of UI test automation and end-to-end testing: login with several users, cart, sorting, sidebar and social links, and the full checkout, in 7 JUnit 5 test classes.
 
 By [Nader Alzghoul](https://nj-burrito.github.io/), QA Automation Engineer in Amman, Jordan.
 
@@ -74,7 +74,7 @@ src/main/java/Shalwa/Nader/pom/
                 CheckoutStepOnePageTests, CheckoutStepTwoPageTests, CheckoutCompletePageTests
 ```
 
-The repo root also holds the project write-up as a PDF and a spreadsheet.
+The repo root also holds the project write-up as a PDF ([Shalwa Automation Project (SAP).pdf](<Shalwa Automation Project (SAP).pdf>)) and a spreadsheet.
 
 ## Who made it
 
